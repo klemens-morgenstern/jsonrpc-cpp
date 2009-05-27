@@ -17,13 +17,15 @@
  */
 
 /**
- * \file tcp-client.cpp
- * \brief Simple JSON-RPC TCP client.
+ * \file udp-client.cpp
+ * \brief Simple JSON-RPC UDP client.
  * \author Sebastien Vincent
  */
 
 #include <cstdio>
 #include <cstdlib>
+
+#include <iostream>
 
 #include "../src/jsonrpc.h"
 
@@ -35,12 +37,16 @@
  */
 int main(int argc, char** argv)
 {
-  Json::Rpc::TcpClient tcpClient(std::string("127.0.0.1"), 8086);
+  Json::Rpc::UdpClient udpClient(std::string("127.0.0.1"), 8086);
   Json::Value query;
+  Json::Value query1;
+  Json::Value query2;
+  Json::Value query3;
+  Json::Value query4;
   Json::FastWriter writer;
   std::string queryStr;
   std::string responseStr;
-  
+
   /* avoid compilation warnings */
   argc = argc;
   argv = argv;
@@ -51,28 +57,42 @@ int main(int argc, char** argv)
     exit(EXIT_FAILURE);
   }
 
-  if(!tcpClient.Connect())
+  if(!udpClient.Connect())
   {
     std::cerr << "Cannot connect to remote peer!" << std::endl;
     exit(EXIT_FAILURE);
   }
 
   /* build JSON-RPC query */
-  query["jsonrpc"] = "2.0";
-  query["id"] = 1;
-  query["method"] = "print";
+  query1["jsonrpc"] = "2.0";
+  query1["id"] = 1;
+  query1["method"] = "print";
+
+  query2["jsonrpc"] = "2.0";
+  query2["method"] = "notify";
+
+  query3["foo"] = "bar";
+
+  query4["jsonrpc"] = "2.0";
+  query4["id"] = 4;
+  query4["method"] = "method";
+
+  query[(unsigned int)0] = query1;
+  query[(unsigned int)1] = query2;
+  query[(unsigned int)2] = query3;
+  query[(unsigned int)3] = query4;
 
   queryStr = writer.write(query);
   std::cout << "Query is: " << queryStr << std::endl;
 
-  if(tcpClient.Send(queryStr) == -1)
+  if(udpClient.Send(queryStr) == -1)
   {
     std::cerr << "Error while sending data!" << std::endl;
     exit(EXIT_FAILURE);
   }
-
+  
   /* wait the response */
-  if(tcpClient.Recv(responseStr) != -1)
+  if(udpClient.Recv(responseStr) != -1)
   {
     std::cout << "Received: " << responseStr << std::endl;
   }
@@ -81,7 +101,7 @@ int main(int argc, char** argv)
     std::cerr << "Error while receiving data!" << std::endl;
   }
 
-  tcpClient.Close();
+  udpClient.Close();
   networking::cleanup();
 
   return EXIT_SUCCESS;
