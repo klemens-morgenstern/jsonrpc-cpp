@@ -57,7 +57,7 @@
  * \section section-links Links
  * 
  * <ul>
- * <li><a href="http://groups.google.com/group/json-rpc/web/json-rpc-1-2-proposal">JSON-RPC 2.0 specification</a>;</li>
+ * <li><a href="http://www.jsonrpc.org/specification">JSON-RPC 2.0 specification</a>;</li>
  * <li><a href="http://jsonrpc-cpp.sourceforge.net">JsonRpc-Cpp website</a>;</li>
  * <li><a href="http://www.sourceforge.net/projects/jsonrpc-cpp">JsonRpc-Cpp project page</a>;</li>
  * <li><a href="http://jsoncpp.sourceforge.net">JsonCpp website</a>.</li>
