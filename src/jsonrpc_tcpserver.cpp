@@ -135,7 +135,7 @@ namespace Json
       int max_sock = m_sock;
 
       tv.tv_sec = ms / 1000;
-      tv.tv_usec = (ms % 1000 ) / 1000;
+      tv.tv_usec = (ms % 1000 ) * 1000;
 
       FD_ZERO(&fdsr);
 
