@@ -26,7 +26,7 @@
 
 #include <iostream>
 
-#include "../src/system.h"
+#include "system.h"
 
 using namespace system_util;
 

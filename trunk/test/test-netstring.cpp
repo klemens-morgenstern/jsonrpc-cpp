@@ -24,7 +24,7 @@
 
 #include <cppunit/extensions/HelperMacros.h>
 
-#include "../src/netstring.h"
+#include "netstring.h"
 
 namespace netstring
 {

@@ -26,7 +26,7 @@
 
 #include <cppunit/extensions/HelperMacros.h>
 
-#include "../src/system.h"
+#include "system.h"
 
 namespace system_util
 {

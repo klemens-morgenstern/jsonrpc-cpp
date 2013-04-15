@@ -27,7 +27,7 @@
 
 #include <iostream>
 
-#include "../src/jsonrpc.h"
+#include "jsonrpc.h"
 
 /**
  * \brief Entry point of the program.

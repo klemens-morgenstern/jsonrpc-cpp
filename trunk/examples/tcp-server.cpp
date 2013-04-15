@@ -26,7 +26,7 @@
 #include <cstdlib>
 #include <csignal>
 
-#include "../src/jsonrpc.h"
+#include "jsonrpc.h"
 
 #include "test-rpc.h"
 

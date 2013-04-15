@@ -24,7 +24,7 @@
 
 #include <cppunit/extensions/HelperMacros.h>
 
-#include "../src/jsonrpc.h"
+#include "jsonrpc.h"
 
 namespace Json
 {
