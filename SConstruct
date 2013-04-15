@@ -7,8 +7,7 @@ import os;
 import platform as pltfrm;
 
 # Configure compiler arguments
-cflags = ['-std=c++98', '-Wall', '-Wextra', '-pedantic', '-Wredundant-decls', '-Wshadow', '-Werror', '-O2'];
-
+cflags = ['-std=c++98', '-Wall', '-Wextra', '-pedantic', '-Wredundant-decls', '-Wshadow', '-Wno-long-long', '-Werror', '-O2', '-Iinclude'];
 cpppath = [];
 libpath = [];
 
@@ -41,7 +40,7 @@ if sys.platform == 'win32':
   cpppath.append('-Ic:\\MinGW\\include');
 
 # Create an environment
-env = Environment(ENV= os.environ.copy(), tools = [platform, "doxygen"], toolpath = ['.', './doc'], CXXFLAGS = cflags, CPPPATH = cpppath, LIBPATH = libpath, LINKFLAGS = linkflags);
+env = Environment(ENV = os.environ.copy(), tools = [platform, "doxygen"], toolpath = ['.', './doc'], CXXFLAGS = cflags, CPPPATH = cpppath, LIBPATH = libpath, LINKFLAGS = linkflags);
 
 # Sources and name of the JsonRpc-Cpp library
 lib_target  = 'jsonrpc';
@@ -57,18 +56,18 @@ lib_sources = ['src/jsonrpc_handler.cpp',
                'src/system.cpp',
                'src/networking.cpp'];
 
-lib_includes = ['src/jsonrpc.h',
-                'src/jsonrpc_handler.h',
-                'src/jsonrpc_server.h',
-                'src/jsonrpc_client.h',
-                'src/jsonrpc_udpserver.h',
-                'src/jsonrpc_tcpserver.h',
-                'src/jsonrpc_udpclient.h',
-                'src/jsonrpc_tcpclient.h',
-                'src/jsonrpc_common.h',
-                'src/netstring.h',
-                'src/system.h',
-                'src/networking.h'];
+lib_includes = ['include/jsonrpc.h',
+                'include/jsonrpc_handler.h',
+                'include/jsonrpc_server.h',
+                'include/jsonrpc_client.h',
+                'include/jsonrpc_udpserver.h',
+                'include/jsonrpc_tcpserver.h',
+                'include/jsonrpc_udpclient.h',
+                'include/jsonrpc_tcpclient.h',
+                'include/jsonrpc_common.h',
+                'include/netstring.h',
+                'include/system.h',
+                'include/networking.h'];
 
 # Build libjsonrpc
 libs = ['json'];
