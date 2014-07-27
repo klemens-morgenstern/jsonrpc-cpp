@@ -35,7 +35,7 @@ AC_ARG_WITH(	[jsoncpp-inc-dir],
 		[JSONCPP_INC_DIR="$withval"], 
 		[JSONCPP_INC_DIR='/usr/include/jsoncpp'])
 
-
+AC_CHECK_LIB([curl], [curl_easy_init])
 #AC_CHECK_LIB([jsoncpp], [])
 # Allow the user to specify the pkgconfig directory.
 #

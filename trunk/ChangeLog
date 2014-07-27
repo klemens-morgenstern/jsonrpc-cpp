@@ -1,4 +1,4 @@
-2012-xx-xx  Sebastien Vincent <sebastien.vincent@cppextrem.com>
+2014-07-27  Sebastien Vincent <sebastien.vincent@cppextrem.com>
 
   * Version 0.5      : - Refactoring to use entity/value/resources patterns;
                        - Autotools support (contributed by Hugo Mildenberger);
