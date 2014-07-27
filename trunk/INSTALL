@@ -5,10 +5,10 @@ Requirements
 -------------
 
 - C++ compiler toolchain;
-- python;
-- scons;
+- automake/autoconf or scons depending of the way to compile;
+- libjsoncpp if available on your system, JsonCpp source files 
+(http://jsoncpp.sourceforge.net/) otherwise;
 - libcurl if you want to build the HTTP client;
-- JsonCpp source files (http://jsoncpp.sourceforge.net/).
 
 For the moment only MinGW compiler is supported to build
 JsonRpc-Cpp on MS Windows. 
@@ -17,6 +17,8 @@ you have to install MinGW-w64.
  
 Build JsonCpp
 --------------
+
+If the libjsoncpp is available on your system, skip this part.
 
 Get JsonCpp source code from SVN repository (there are no releases):
 
@@ -47,6 +49,17 @@ for Windows with MinGW:
 Build JsonRpc-Cpp
 ------------------
 
+You can use the autotools or the scons way.
+
+1) Autotools
+
+$ ./configure
+$ make
+# make install
+
+To specify another prefix for installation, use ./configure --prefix=/path/to/directory before make.
+
+2) Scons
 To build the library: 
 $ scons build 
 
@@ -59,9 +72,7 @@ $ scons -c all
 To build documentation:
 $ scons doc
 
-Installation
-------------
-
+To install:
 Run (with root or admin privileges): 
 # scons install
 
@@ -90,6 +101,8 @@ $ scons examples
 
 This will build tcp-server, udp-server, tcp-client and udp-client examples.
 Note that servers will be bind to localhost, port 8086 and clients will connect to the same address/port.
+
+The examples are built by default when compiling with autotools.
 
 To run the TCP JSON-RPC server:
 $ examples/tcp-server

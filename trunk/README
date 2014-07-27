@@ -8,10 +8,12 @@ JsonRpc-Cpp library is a C++ implementation of JSON-RPC 2.0 protocol (http://www
 
 It uses JsonCpp library (http://jsoncpp.sourceforge.net/) to encode/decode JSON messages.
 
-Installation
--------------
+Compilation and installation
+----------------------------
 
-See INSTALL file.
+The preferred way to build is via autotools (./configure ; make ; make install).
+
+You can also build and install via scons (see INSTALL file).
 
 Future work
 ------------
