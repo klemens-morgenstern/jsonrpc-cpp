@@ -53,6 +53,7 @@ You can use the autotools or the scons way.
 
 1) Autotools
 
+$ ./autogen.sh
 $ ./configure
 $ make
 # make install
