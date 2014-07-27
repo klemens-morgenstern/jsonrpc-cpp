@@ -46,7 +46,7 @@ static void signal_handler(int code)
   {
     case SIGINT:
     case SIGTERM:
-      g_run = 1;
+      g_run = 0;
       break;
     default:
       break;
