@@ -11,7 +11,7 @@ It uses JsonCpp library (http://jsoncpp.sourceforge.net/) to encode/decode JSON 
 Compilation and installation
 ----------------------------
 
-The preferred way to build is via autotools (./configure ; make ; make install).
+The preferred way to build is via autotools (./autogen.sh ; ./configure ; make ; make install).
 
 You can also build and install via scons (see INSTALL file).
 
