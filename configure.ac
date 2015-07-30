@@ -1,4 +1,4 @@
-AC_INIT([jsonrpc-cpp], [0.5], [])
+AC_INIT([jsonrpc-cpp], [0.6], [])
 AC_CONFIG_MACRO_DIR([m4])
 AC_CANONICAL_HOST
 AM_INIT_AUTOMAKE([-Wall -Werror foreign nostdinc subdir-objects dist-bzip2 dist-zip tar-ustar])

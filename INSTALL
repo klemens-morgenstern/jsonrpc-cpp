@@ -10,10 +10,6 @@ Requirements
 (http://jsoncpp.sourceforge.net/) otherwise;
 - libcurl if you want to build the HTTP client;
 
-For the moment only MinGW compiler is supported to build
-JsonRpc-Cpp on MS Windows. 
-Note for Windows 64-bit, in order to make 64-bit library, 
-you have to install MinGW-w64.
  
 Build JsonCpp
 --------------
@@ -29,9 +25,6 @@ Compilation,
 for Linux and MacOS X:
 $ scons platform=linux-gcc
 
-for Windows (MinGW):
-$ scons platform=mingw
-
 Installation,
 for Linux: 
 # cp libs/linux-gcc-*/libjson_linux-gcc*libmt.so /usr/local/lib/libjson.so
@@ -40,11 +33,6 @@ for Linux:
 for MacOS X: 
 # cp libs/linux-gcc-*/libjson_linux-gcc*.dylib /usr/local/lib/libjson.dylib
 # cp -r include/json /usr/local/include/json
-
-for Windows with MinGW:
-# xcopy libs\mingw\libjson_mingw*.a C:\MinGW\lib\libjson.a
-# mkdir C:\MinGW\include\json
-# xcopy /S include\json C:\MinGW\include\json
 
 Build JsonRpc-Cpp
 ------------------
@@ -78,13 +66,10 @@ Run (with root or admin privileges):
 # scons install
 
 Default will install include files in /usr/local/include/jsonrpc/ and 
-libjsonrpc.so file in /usr/local/lib/ on Unix-like and C:\MinGW\include and
-C:\MinGW\lib respectively for MS Windows.
+libjsonrpc.so file in /usr/local/lib/ on Unix-like.
 
 To choose another installation directory add "prefix" option: 
 $ scons install prefix='/path/to/installation/directory'
-
-Note: You have to double '\' character on MS Windows (i.e. C:\\MinGW\\).
 
 To uninstall, run (with root or admin privileges):
 # scons -c install 

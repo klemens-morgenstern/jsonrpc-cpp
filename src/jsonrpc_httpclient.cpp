@@ -22,6 +22,8 @@
  * \author Brian Panneton
  */
 
+#ifdef CURL_ENABLED_H
+
 #include <sstream>
 
 #include "jsonrpc_httpclient.h"
@@ -273,3 +275,4 @@ namespace Json
   } /* namespace Rpc */
 } /* namespace Json */
 
+#endif

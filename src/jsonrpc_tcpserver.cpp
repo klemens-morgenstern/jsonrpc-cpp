@@ -25,12 +25,18 @@
 #include <iostream>
 #include <stdexcept>
 
-#include "jsonrpc_tcpserver.h"
-
-#include "netstring.h"
-
 #include <cstring>
 #include <cerrno>
+
+#include "jsonrpc_tcpserver.h"
+#include "netstring.h"
+
+#ifdef _WIN32
+/* poll is not defined on Windows but there is WSAPoll */
+#define poll WSAPoll
+#else
+#include <poll.h>
+#endif
 
 namespace Json 
 {
@@ -102,7 +108,7 @@ namespace Json
             rep = netstring::encode(rep);
           }
 
-          int bytesToSend = rep.length();
+          size_t bytesToSend = rep.length();
           const char* ptrBuffer = rep.c_str();
           do
           {
@@ -130,51 +136,38 @@ namespace Json
 
     void TcpServer::WaitMessage(uint32_t ms)
     {
-      fd_set fdsr;
-      struct timeval tv;
-      int max_sock = m_sock;
+      struct pollfd* pfd = NULL;
+      size_t i = 0;
 
-      tv.tv_sec = ms / 1000;
-      tv.tv_usec = (ms % 1000 ) * 1000;
+      pfd = new pollfd[1 + m_clients.size()];
 
-      FD_ZERO(&fdsr);
-
-#ifdef _WIN32
-      /* on Windows, a socket is not an int but a SOCKET (unsigned int) */
-      FD_SET((SOCKET)m_sock, &fdsr);
-#else
-      FD_SET(m_sock, &fdsr);
-#endif
+      pfd[i].fd = m_sock;
+      pfd[i].events = POLLIN;
+      i++;
 
       for(std::list<int>::iterator it = m_clients.begin() ; it != m_clients.end() ; it++)
       {
-#ifdef _WIN32
-        FD_SET((SOCKET)(*it), &fdsr);
-#else
-        FD_SET((*it), &fdsr);
-#endif
-
-        if((*it) > max_sock)
-        {
-          max_sock = (*it);
-        }
+        pfd[i].fd = (*it);
+        pfd[i].events = POLLIN;
+        i++;
       }
 
-      max_sock++;
-
-      if(select(max_sock, &fdsr, NULL, NULL, ms ? &tv : NULL) > 0)
+      if(poll(pfd, i, ms) > 0)
       {
-        if(FD_ISSET(m_sock, &fdsr))
+        if(pfd[0].revents & POLLIN)
         {
           Accept();
         }
 
+        i = 1;
+
         for(std::list<int>::iterator it = m_clients.begin() ; it != m_clients.end() ; it++)
         {
-          if(FD_ISSET((*it), &fdsr))
+          if(pfd[i].revents & POLLIN)
           {
             Recv((*it));
           }
+          i++;
         }
 
         /* remove disconnect socket descriptor */
@@ -195,6 +188,8 @@ namespace Json
       {
         /* error */
       }
+      
+      delete[] pfd;
     }
 
     bool TcpServer::Listen() const

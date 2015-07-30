@@ -1,3 +1,8 @@
+2015-07-27  Sebastien Vincent <sebastien.vincent@cppextrem.com>
+
+  * Version 0.6      : - Uses poll() instead of select();
+                       - Drop MS Windows build support.
+	
 2014-07-27  Sebastien Vincent <sebastien.vincent@cppextrem.com>
 
   * Version 0.5      : - Refactoring to use entity/value/resources patterns;

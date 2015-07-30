@@ -27,6 +27,8 @@
 
 #ifdef _WIN32
 
+#define WIN32_LEAN_AND_MEAN 
+
 #ifndef _MSC_VER
 #include <stdint.h>
 #endif
@@ -52,6 +54,7 @@
 #endif
 
 typedef int socklen_t;
+typedef int ssize_t;
 #define close closesocket
 
 #else
