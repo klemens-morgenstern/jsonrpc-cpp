@@ -54,9 +54,8 @@
 #define _WIN32_WINNT OLD_WIN32_WINNT
 #endif
 
-typedef int socklen_t;
-typedef int ssize_t;
-//#define close closesocket ???WTF???
+#include <crtdefs.h>
+
 
 template <typename... Args>
 auto close(Args&&... args) -> decltype(closesocket(std::forward<Args>(args)...)) {
