@@ -35,6 +35,7 @@
 
 #include <windows.h>
 #include <winsock2.h>
+#include <utility>
 
 /* to use getaddrinfo, _WIN32_WINNT have to
  * equal at least 0x0501
@@ -55,8 +56,12 @@
 
 typedef int socklen_t;
 typedef int ssize_t;
-#define close closesocket
+//#define close closesocket ???WTF???
 
+template <typename... Args>
+auto close(Args&&... args) -> decltype(closesocket(std::forward<Args>(args)...)) {
+  return closesocket(std::forward<Args>(args)...);
+}
 #else
 
 #include <stdint.h>
